@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mi Portfolio</title>
+<!-- ① T A I L W I N D  -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- ② Google Font Playfair Display -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- ③ Tus estilos “finos” -->
+<style>
+    section {
+      scroll-snap-align: start;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    .nav-dot       { transition: all .3s ease; }
+    .nav-dot.active{ transform: scale(1.5); background:#3b82f6; }
+
+    .publication-image{
+      box-shadow:0 20px 25px -5px rgb(0 0 0 / .2),
+                 0 10px 10px -5px rgb(0 0 0 / .1);
+      transition:transform .3s ease; position:relative; overflow:hidden;
+    }
+    .publication-image:hover{ transform:translateY(-10px); }
+
+    .slide-content{ opacity:0; transform:translateY(20px);
+                    transition:opacity .8s ease, transform .8s ease; }
+    .slide-visible .slide-content{ opacity:1; transform:none; }
+
+    .navigation-arrows a{ transition:all .3s ease; }
+    .navigation-arrows a:hover{ transform:scale(1.2); }
+
+    .side-nav{ position:fixed; right:20px; top:50%; transform:translateY(-50%);
+               z-index:100; }
+
+    .progress-bar{ position:fixed; top:0; left:0; height:4px; background:#3b82f6;
+                   z-index:1000; width:0; transition:width .1s ease; }
+
+    .image-placeholder{
+      background:rgb(0 0 0 / .1); display:flex; flex-direction:column;
+      align-items:center; justify-content:center; color:#555; text-align:center;
+      padding:20px;
+    }
+  </style>
+</head>
+<body class="scroll-smooth">
+<!-- ④ Barra de progreso (ahora sí existe) -->
+<div class="progress-bar" id="progressBar"></div>
+<!-- ⑤ Todo tu contenido tal cual … -->
+<!-- =================== NAVEGACIÓN LATERAL =================== -->
+<div class="side-nav">
+<div class="flex flex-col space-y-4"><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500 active" href="#intro"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub1"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub2"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub3"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub4"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub5"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub6"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#pub7"></a><a class="nav-dot w-3 h-3 rounded-full bg-gray-400 hover:bg-blue-500" href="#contact"></a></div>
+</div>
+<!-- Sección de Introducción -->
+<section class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white slide" id="intro">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="md:w-1/2">
+<h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Portfolio Editorial</h1>
+<p class="text-xl md:text-2xl mb-8 opacity-90">Publicaciones y trabajos editoriales destacados</p>
+<div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-lg">
+<h2 class="text-2xl font-bold mb-4">Sobre Mi</h2>
+<p class="mb-4">Soy un profesional especializado en la redacción y edición de publicaciones relacionadas con comunicación, políticas públicas, economía social y temas de desarrollo sostenible.</p>
+<p>Mi trabajo se centra en comunicar ideas y temáticas que contribuyan a la difusión del conocimiento en áreas de impacto social.</p>
+</div>
+</div>
+<div class="md:w-1/2 flex justify-center">
+<div class="w-64 h-64 rounded-full overflow-hidden bg-white bg-opacity-10 backdrop-blur-sm p-1">
+<div class="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+<svg class="h-32 w-32 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center">
+<p class="mb-4 text-blue-200">Desliza hacia abajo para explorar mis publicaciones</p>
+<a class="inline-block animate-bounce" href="#pub1">
+<svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Publicación 1 -->
+<section class="bg-gradient-to-br from-blue-50 to-indigo-100 slide" id="pub1">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-1">
+<span class="text-blue-600 font-semibold">Edición de Publicaciones Gubernamentales</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">Las Políticas Sociales en Perspectiva</h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">Como editor principal, coordiné el desarrollo de esta serie de publicaciones del Estado Nacional que analiza las políticas sociales desde una perspectiva integral. Mi trabajo incluyó la revisión de contenidos, estructuración de capítulos y asegurar la coherencia narrativa a lo largo del documento.</p>
+<p class="text-gray-600">Trabajé en estrecha colaboración con expertos en políticas públicas para garantizar que la información fuera precisa y accesible para un público amplio.</p>
+</div>
+<a class="inline-flex items-center px-6 py-3 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition-colors" href="https://www.argentina.gob.ar/las-politicas-sociales-en-perspectiva" target="_blank">
+                    Ver publicación
+                    <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-2 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Políticas alimentarias" class="w-full h-auto object-cover aspect-[3/4]" src="img/img1.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-blue-700 hover:text-blue-900" href="#intro">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-blue-700 hover:text-blue-900" href="#pub2">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Publicación 2 -->
+<section class="bg-gradient-to-br from-indigo-50 to-purple-100 slide" id="pub2">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-2">
+<span class="text-indigo-600 font-semibold">Edición de Publicaciones Gubernamentales</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">Políticas Sociales: Estrategias para Construir un Nuevo Horizonte</h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">Participé como de la edición de esta serie de libros sobre estrategias para el desarrollo de políticas sociales. Mi responsabilidad incluyó la revisión de artículos, coordinación con autores y la estructuración del contenido para maximizar su impacto.</p>
+<p class="text-gray-600">Trabajé en la adaptación de contenidos para hacerlos más accesibles a ciudadanos destinatarios de políticas sociales.</p>
+</div>
+<a class="inline-flex items-center px-6 py-3 bg-indigo-700 text-white font-medium rounded-lg hover:bg-indigo-800 transition-colors" href="https://www.argentina.gob.ar/noticias/presentamos-el-libro-politicas-sociales-estrategias-para-construir-un-nuevo-horizonte-de" target="_blank">
+                    Ver publicación
+                    <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-1 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Políticas Sociales: Estrategias para Construir un Nuevo Horizonte" class="w-full h-auto object-cover aspect-[3/4]" src="img/img2.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-indigo-700 hover:text-indigo-900" href="#pub1">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-indigo-700 hover:text-indigo-900" href="#pub3">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Publicación 3 -->
+<section class="bg-gradient-to-br from-purple-50 to-pink-100 slide" id="pub3">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-1">
+<span class="text-purple-600 font-semibold">Comunicación y Economía Social</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">Futuro Común: Diálogos de Economía Cooperativa, Popular, Social y Solidaria</h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">Autor y editor de este libro sobre economía cooperativa y solidaria. Realicé investigación, entrevistas y análisis para presentar una visión integral de las tendencias actuales en economía social.</p>
+<p class="text-gray-600">La publicación explora las intersecciones entre diferentes modelos económicos alternativos y propone marcos de colaboración para fortalecer el sector.</p>
+</div>
+<a class="inline-flex items-center px-6 py-3 bg-purple-700 text-white font-medium rounded-lg hover:bg-purple-800 transition-colors" href="https://www.idelcoop.org.ar/revista/238/futuro-comun-dialogos-economia-cooperativa-popular-social-y-solidaria" target="_blank">
+                    Ver publicación
+                    <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-2 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Futuro Común: Diálogos de Economía Cooperativa" class="w-full h-auto object-cover aspect-[3/4]" src="img/img3.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-purple-700 hover:text-purple-900" href="#pub2">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-purple-700 hover:text-purple-900" href="#pub4">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Publicación 4 -->
+<section class="bg-gradient-to-br from-pink-50 to-red-100 slide" id="pub4">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-2">
+<span class="text-pink-600 font-semibold">Comunicación y Economía Social</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">Comunicación para la Economía Social</h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">Como coautor y editor, contribuí significativamente a este libro enfocado en estrategias de comunicación para el sector de la economía social. Desarrollé capítulos específicos sobre narrativas efectivas y uso de medios digitales para organizaciones cooperativas.</p>
+<p class="text-gray-600">El libro ofrece herramientas prácticas y marcos conceptuales para mejorar la comunicación en entidades de la economía social y solidaria.</p>
+</div>
+<a class="inline-flex items-center px-6 py-3 bg-pink-700 text-white font-medium rounded-lg hover:bg-pink-800 transition-colors" href="https://cooperativas.com.ar/presentan-libro-sobre-comunicacion-para-la-economia-social/" target="_blank">
+                    Ver publicación
+                    <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-1 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Comunicación para la Economía Social" class="w-full h-auto object-cover aspect-[3/4]" src="img/img4.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-pink-700 hover:text-pink-900" href="#pub3">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-pink-700 hover:text-pink-900" href="#pub5">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Publicación 5 -->
+<section class="bg-gradient-to-br from-red-50 to-yellow-100 slide" id="pub5">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-1">
+<span class="text-red-600 font-semibold">Edición de revistas</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">Por la Madre Tierra que nos da la Vida</h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">Como editor pricipal, coordiné esta edición especial sobre temas ambientales y sostenibilidad desde una perspectiva social e intercultural. Supervisé la selección de artículos, trabajé con los autores en la edición de contenidos y escribí el editorial principal.</p>
+<p class="text-gray-600">La publicación aborda la relación entre comunidades, economía social y cuidado del medio ambiente, con un enfoque en prácticas sostenibles.</p>
+</div>
+<a class="inline-flex items-center px-6 py-3 bg-green-700 text-white font-medium rounded-lg hover:bg-green-800 transition-colors" href="https://observatorioess.org.ar/wp-content/uploads/2022/12/Revista-Por-la-Madre-Tierra-que-nos-da-la-vida.pdf" target="_blank">
+                    Ver publicación
+                    <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-2 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Por la Madre Tierra que nos da la Vida" class="w-full h-auto object-cover aspect-[3/4]" src="img/img5.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-green-700 hover:text-green-900" href="#pub4">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-green-700 hover:text-green-900" href="#pub6">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Publicación 6 -->
+<section class="bg-gradient-to-br from-yellow-50 to-amber-100 slide" id="pub6">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-2">
+<span class="text-yellow-600 font-semibold">Manuales de comunicación</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">Cuadernillo Memoria y Buenas Prácticas</h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">Participé del desarrollé de este cuadernillo sobre buenas prácticas comunicacionales. El material está diseñado como una herramienta educativa y de referencia para organizaciones comunitarias.</p>
+<p class="text-gray-600">Incluye metodologías y sistematización de buenas prácticas en proyectos sociales.</p>
+</div>
+<a class="inline-flex items-center px-6 py-3 bg-yellow-700 text-white font-medium rounded-lg hover:bg-yellow-800 transition-colors" href="https://biblioteca.isauroarancibia.org.ar/wp-content/uploads/2020/09/38-Cuadernillo-Memoria-y-Buenas-Practicas.pdf" target="_blank">
+                    Ver publicación
+                    <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-1 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Cuadernillo Memoria y Buenas Prácticas" class="w-full h-auto object-cover aspect-[3/4]" src="img/img6.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-yellow-700 hover:text-yellow-900" href="#pub5">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-yellow-700 hover:text-yellow-900" href="#contact">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- Contacto -->
+
+<section class="bg-gradient-to-br from-amber-50 to-lime-100 slide" id="pub7">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 order-2 md:order-1">
+<span class="text-lime-600 font-semibold">Publicación Técnica</span>
+<h2 class="text-4xl font-bold text-gray-800 mt-2 mb-6">
+          Circuitos Cortos Comerciales de la Agricultura Familiar
+        </h2>
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">Mi Rol</h3>
+<p class="text-gray-600 mb-4">
+            Participé en la edición y coordinación de esta publicación técnica que reúne experiencias de comercialización de la agricultura familiar, campesina e indígena en Argentina.
+          </p>
+<p class="text-gray-600">
+            El trabajo recopila aportes territoriales e institucionales, aportando al fortalecimiento de estrategias de desarrollo local con enfoque en soberanía alimentaria.
+          </p>
+</div>
+<a href="https://repositorio.inta.gob.ar/xmlui/handle/20.500.12123/16060" target="_blank" class="inline-flex items-center px-6 py-3 bg-lime-700 text-white font-medium rounded-lg hover:bg-lime-800 transition-colors">
+          Ver publicación
+<svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+<div class="md:w-1/2 order-1 md:order-2 flex justify-center">
+<div class="publication-image w-full max-w-md rounded-lg overflow-hidden">
+<img alt="Circuitos cortos comerciales de la agricultura familiar" class="w-full h-auto object-cover aspect-[3/4]" src="img/img7.jpg"/>
+</div>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-lime-700 hover:text-lime-900" href="#pub6">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-lime-700 hover:text-lime-900" href="#contact">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section><section class="bg-gradient-to-br from-blue-900 to-indigo-900 text-white slide" id="contact">
+<div class="container mx-auto px-6 py-12 max-w-6xl slide-content">
+<h2 class="text-4xl font-bold mb-12 text-center">Contacto</h2>
+<div class="flex flex-col md:flex-row gap-12">
+<div class="md:w-1/2 bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-lg">
+<h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
+<ul class="space-y-6">
+<li class="flex items-start">
+<svg class="h-6 w-6 text-blue-300 mr-4 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-blue-200 mb-1">Email</h4>
+<p>mglimas@gmail.com</p>
+</div>
+</li>
+<li class="flex items-start">
+<svg class="h-6 w-6 text-blue-300 mr-4 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-blue-200 mb-1">Teléfono</h4>
+<p>+54 11 5489 5992</p>
+</div>
+</li>
+<li class="flex items-start">
+<svg class="h-6 w-6 text-blue-300 mr-4 mt-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div>
+<h4 class="font-semibold text-blue-200 mb-1">Ubicación</h4>
+<p>Buenos Aires, Argentina</p>
+</div>
+</li>
+</ul>
+<div class="mt-10">
+<h3 class="text-xl font-bold mb-4">Redes Sociales</h3>
+<div class="flex space-x-4">
+<a class="w-12 h-12 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all duration-300" href="#">
+<svg class="bi bi-linkedin" fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"></path>
+</svg>
+</a>
+<a class="w-12 h-12 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all duration-300" href="#">
+<svg class="bi bi-twitter" fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
+</svg>
+</a>
+<a class="w-12 h-12 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all duration-300" href="#">
+<svg class="bi bi-instagram" fill="currentColor" height="20" viewbox="0 0 16 16" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 bg-white bg-opacity-10 backdrop-blur-sm p-8 rounded-lg">
+<h3 class="text-2xl font-bold mb-6">Envíame un Mensaje</h3>
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-blue-200 mb-2" for="name">Nombre</label>
+<input class="w-full px-4 py-3 bg-white bg-opacity-20 border border-blue-300 border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200 placeholder-opacity-70" id="name" placeholder="Tu nombre" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-blue-200 mb-2" for="email">Correo Electrónico</label>
+<input class="w-full px-4 py-3 bg-white bg-opacity-20 border border-blue-300 border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200 placeholder-opacity-70" id="email" placeholder="tu@email.com" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-blue-200 mb-2" for="message">Mensaje</label>
+<textarea class="w-full px-4 py-3 bg-white bg-opacity-20 border border-blue-300 border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-blue-200 placeholder-opacity-70" id="message" placeholder="Escribe tu mensaje aquí..." rows="5"></textarea>
+</div>
+<button class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 flex items-center justify-center" type="button">
+                        Enviar Mensaje
+                        <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</form>
+</div>
+</div>
+<div class="navigation-arrows flex justify-between mt-12">
+<a class="text-white hover:text-blue-300" href="#pub6">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<a class="text-white hover:text-blue-300" href="#intro">
+<svg class="h-10 w-10" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections   = document.querySelectorAll('section');
+    const navDots    = document.querySelectorAll('.nav-dot');
+    const progressBar= document.getElementById('progressBar');
+
+    sections[0].classList.add('slide-visible');
+
+    function updateProgressBar(){
+      const y     = window.scrollY;
+      const max   = document.body.clientHeight - innerHeight;
+      progressBar.style.width = (y / max * 100) + '%';
+    }
+
+    function checkVisibleSection(){
+      const winH = innerHeight, y = scrollY;
+      sections.forEach((sec,i)=>{
+        const top = sec.offsetTop, h = sec.clientHeight;
+        if (y >= top - winH/2 && y < top + h - winH/2){
+          navDots.forEach(d=>d.classList.remove('active'));
+          navDots[i].classList.add('active');
+          sec.classList.add('slide-visible');
+        }
+      });
+      updateProgressBar();
+    }
+
+    window.addEventListener('scroll', checkVisibleSection);
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const el=document.querySelector(a.getAttribute('href'));
+        if(el) window.scrollTo({top:el.offsetTop, behavior:'smooth'});
+      });
+    });
+
+    const f=document.querySelector('form');
+    if(f) f.addEventListener('submit',e=>{
+      e.preventDefault(); alert('¡Gracias por tu mensaje!'); f.reset();
+    });
+
+    checkVisibleSection();
+  });
+  </script>
+</body>
+</html>
